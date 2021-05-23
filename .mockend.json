@@ -1,0 +1,8 @@
+{
+    "Alarm": {
+      "severity": "string",
+      "acknowledgeTime": "date",
+      "closeTime": "date",
+      "realTime": "boolean"
+    }
+  }
