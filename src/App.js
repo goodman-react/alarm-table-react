@@ -18,9 +18,10 @@ import { green } from '@material-ui/core/colors';
 import CloseAlarmDialog from "./components/dialogs/CloseAlarmDialog";
 
 
-const EditButton = ({
+export const EditButton = ({
   selectedRow,
   isAcknowledge,
+  isClosed,
   setOpenSeverityDialog,
   setOpenAcknowledgeDialog,
   setOpenCloseAlarmDialog,
@@ -78,7 +79,7 @@ const EditButton = ({
           {!isAcknowledge &&
             <MenuItem onClick={handleAcknowledge}>Acknowledge Alarm</MenuItem>
           }
-          {!!isAcknowledge &&
+          {!isClosed &&
             <MenuItem onClick={handleCloseAlarm}>Close Alarm</MenuItem>
           }
         </Popover>
@@ -165,6 +166,7 @@ export default function App() {
             <EditButton
               selectedRow={params.row}
               isAcknowledge={Boolean(params.row.acknowledgeTime)}
+              isClosed={Boolean(params.row.closeTime)}
               setOpenSeverityDialog={setOpenSeverityDialog}
               setOpenAcknowledgeDialog={setOpenAcknowledgeDialog}
               setOpenCloseAlarmDialog={setOpenCloseAlarmDialog}
