@@ -1,25 +1,43 @@
-import { READ_LIST, READ_LIST_FAILURE } from "./actionCreators";
-import { readList } from "../APIUtils";
+import { READ_LIST_FAILURE, READ_ALARM_LIST, UPDATE_ALARM, UPDATE_ALARM_FAILURE } from "./actionCreators";
+import { readList, updateList } from "../APIUtils";
 
-/**
- * Read the list, according page, page size and sorting.
- * @param path is the endpoint of the API.
- */
-export const readDevices = (path) => {
+export const readAlarms = (path) => {
   return (dispatch) => {
     readList(path)
       .then((data) =>
         dispatch(
           {
-            type: READ_LIST,
+            type: READ_ALARM_LIST,
             payload: data
-          },
-          console.log("Actions historyData: ", data)
+          }
         )
       )
       .catch((error) => {
         dispatch({
           type: READ_LIST_FAILURE,
+          payload: error
+        });
+        console.log(error.response);
+        throw error;
+      });
+  };
+};
+
+export const updateAlarm = (path, data, id) => {
+  return (dispatch) => {
+    updateList(path, data, id)
+      .then((data) =>{
+        dispatch(
+          {
+            type: UPDATE_ALARM,
+            payload: true
+          }
+        );
+      }
+      )
+      .catch((error) => {
+        dispatch({
+          type: UPDATE_ALARM_FAILURE,
           payload: error
         });
         console.log(error.response);

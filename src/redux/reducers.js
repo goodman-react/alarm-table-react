@@ -1,18 +1,30 @@
-import { READ_LIST, READ_LIST_FAILURE } from "./actionCreators";
+import { READ_LIST_FAILURE, READ_ALARM_LIST, UPDATE_ALARM, UPDATE_ALARM_FAILURE } from "./actionCreators";
 
 export const initialState = {
   historyData: [],
-  historyError: {}
+  historyError: {},
+  status: false
 };
 
 const historyReducer = (state = initialState, action) => {
   switch (action.type) {
-    case READ_LIST:
+    case READ_ALARM_LIST:
       return {
         ...state,
-        historyData: action.payload
+        historyData: action.payload,
+        status: false
       };
     case READ_LIST_FAILURE:
+      return {
+        ...state,
+        historyError: action.payload
+      };
+    case UPDATE_ALARM:
+      return {
+        ...state,
+        status: action.payload
+      };
+    case UPDATE_ALARM_FAILURE:
       return {
         ...state,
         historyError: action.payload
